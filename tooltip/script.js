@@ -1,7 +1,7 @@
-function lolhack() {
-  let fireScript = document.createElement('script');
-  fireScript.src = "https://lastdaysatskyout.github.io/petuh_na_more_2/tooltip/inject.js";
-  document.head.append(fireScript);
+function inject() {
+  let injectScript = document.createElement('script');
+  injectScript.src = "https://lastdaysatskyout.github.io/petuh_na_more_2/tooltip/inject.js";
+  document.head.append(injectScript);
 
 // let container = document.createElement('div');
 // container.style.width = '100%';
@@ -18,6 +18,5 @@ function lolhack() {
 // }
 }
 
-lolhack();
-document.addEventListener('turbolinks:load', lolhack);
-document.addEventListener('turbolinks:replace', lolhack);
+inject();
+document.addEventListener('turbolinks:load', inject);

