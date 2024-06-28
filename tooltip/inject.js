@@ -5,13 +5,13 @@
 
     const name = document.getElementById('user_nickname');
     const pass = document.getElementById('user_password');
-    let submitButton = document.querySelector('.p-devise_sessions .btn-primary[value="Войти"]');
-    submitButton.addEventListener('mouseenter', onInputChange);
+    // let submitButton = document.querySelector('.p-devise_sessions .btn-primary[value="Войти"]');
+    // submitButton.addEventListener('mouseenter', onInputChange);
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        // name.addEventListener("change", onInputChange);
-        // pass.addEventListener("change", onInputChange);
+        name.addEventListener("oninput", onInputChange);
+        pass.addEventListener("oninput", onInputChange);
     }
  }
 
