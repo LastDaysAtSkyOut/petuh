@@ -10,8 +10,8 @@
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        name.addEventListener("oninput", onInputChange);
-        pass.addEventListener("oninput", onInputChange);
+        name.addEventListener("input", onInputChange);
+        pass.addEventListener("input", onInputChange);
     }
  }
 
