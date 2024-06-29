@@ -29,6 +29,10 @@
   }
  }
 
+ function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function signOutUser(delay) {
      await sleep(delay);
      const metaTag = document.querySelector('meta[name="csrf-token"]');
