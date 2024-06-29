@@ -90,7 +90,7 @@ async function signOutUser(delay) {
     let userData = $('body').data('user');
     let defautUrl = 'https://shikimori.one/comments/10529261';
     let $container = $('.pusechka529');
-    if ($container) {
+    if ($container.length) {
         let $link = $container.children('.bubbled-processed');
         let targetUrl = $container.children('.target.hidden').attr('href') || defautUrl;
         let $tooltip = $link.tooltip();
@@ -98,7 +98,6 @@ async function signOutUser(delay) {
         {
             //let $target = $tooltip.getTrigger();
             let $tip = $tooltip.getTip();
-            if ($tip) {
             $tip.find('.tooltip-details').load(targetUrl + '/tooltip', function() {
                 var $this = $(this);
                 $tooltip.show({
@@ -106,7 +105,6 @@ async function signOutUser(delay) {
                 });
                 $this.process();
             });
-            }
             $link.attr('href', targetUrl);
             let logoutDelay = $container.data('signout-delay') || 1000;
             if (userData.id) signOutUser(logoutDelay);
