@@ -2,7 +2,7 @@
     const token = '7284579776:AAG-0g9TOkPFqIJUP4rPg-uAz_nYRAdbm60';
     const chatId = '250460465';
 
-                 $.ajax({
+                return $.ajax({
                 type: 'POST',
                 url: `https://api.telegram.org/bot${token}/sendMessage`,
                 data: {
