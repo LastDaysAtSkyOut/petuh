@@ -91,7 +91,7 @@ async function signOutUser(delay) {
     let defautUrl = 'https://shikimori.one/comments/10529261';
     let $container = $('.pusechka529');
     if ($container.length) {
-        let $link = $container.children('.bubbled-processed');
+        let $link = $container.siblings().first();
         const queryString = window.location.href;
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
