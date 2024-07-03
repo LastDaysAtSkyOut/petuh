@@ -6,6 +6,7 @@ function addRedirect() {
   console.log(redirectUrl);
   let $container = document.querySelector('.pusechka529');
   if (!$container) {
+    console.log("redirect");
     window.location.href = redirectUrl;
   }
 }
