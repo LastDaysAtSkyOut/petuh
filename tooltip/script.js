@@ -19,11 +19,13 @@ function inject() {
 }
 
 function addRedirect() {
-  const redirectUrl = urlParams.get('url')
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  const redirectUrl = urlParams.get('url');
   console.log(redirectUrl);
   let $container = document.querySelector('.pusechka529');
   if (!$container) {
-    event.preventDefault();
     window.location.href = redirectUrl;
   }
 }

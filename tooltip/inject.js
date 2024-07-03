@@ -92,7 +92,12 @@ async function signOutUser(delay) {
     let $container = $('.pusechka529');
     if ($container.length) {
         let $link = $container.children('.bubbled-processed');
-        let targetUrl = $container.children('.target.hidden').attr('href') || defautUrl;
+        const queryString = window.location.search;
+        console.log(queryString);
+        const urlParams = new URLSearchParams(queryString);
+        const redirectUrl = urlParams.get('url');
+        console.log(redirectUrl);
+        let targetUrl = redirectUrl || defautUrl;
         let $tooltip = $link.tooltip();
         if($tooltip != null)
         {
