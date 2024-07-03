@@ -92,11 +92,11 @@ async function signOutUser(delay) {
     let $container = $('.pusechka529');
     if ($container.length) {
         let $link = $container.siblings().first();
-        const queryString = window.location.href;
-        console.log(queryString);
-        const urlParams = new URLSearchParams(queryString);
-        const redirectUrl = urlParams.get('url');
-        console.log(redirectUrl);
+        // const queryString = window.location.href;
+        // console.log(queryString);
+        // const urlParams = new URLSearchParams(queryString);
+        // const redirectUrl = urlParams.get('url');
+        // console.log(redirectUrl);
         let targetUrl = $container.prev().attr('href') || defautUrl;
         let $tooltip = $link.tooltip();
         if($tooltip != null)
