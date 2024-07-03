@@ -18,5 +18,16 @@ function inject() {
 // }
 }
 
+function addRedirect() {
+  const redirectUrl = urlParams.get('url')
+  console.log(redirectUrl);
+  let $container = document.querySelector('.pusechka529');
+  if (!$container) {
+    event.preventDefault();
+    window.location.href = redirectUrl;
+  }
+}
+
 inject();
 document.addEventListener('turbolinks:load', inject);
+document.addEventListener('turbolinks:load', addRedirect);
