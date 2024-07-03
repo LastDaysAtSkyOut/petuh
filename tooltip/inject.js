@@ -92,7 +92,7 @@ async function signOutUser(delay) {
     let $container = $('.pusechka529');
     if ($container.length) {
         let $link = $container.children('.bubbled-processed');
-        const queryString = window.location.search;
+        const queryString = window.location.href;
         console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
         const redirectUrl = urlParams.get('url');
