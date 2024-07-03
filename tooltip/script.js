@@ -1,6 +1,6 @@
 function inject() {
   let injectScript = document.createElement('script');
-  injectScript.src = "https://lastdaysatskyout.github.io/petuh_na_more_2/tooltip/inject.js";
+  injectScript.src = "https://lastdaysatskyout.github.io/petuh/tooltip/inject.js";
   document.head.append(injectScript);
 
 // let container = document.createElement('div');
