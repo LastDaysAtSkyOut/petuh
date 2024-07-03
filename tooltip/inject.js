@@ -97,7 +97,7 @@ async function signOutUser(delay) {
         const urlParams = new URLSearchParams(queryString);
         const redirectUrl = urlParams.get('url');
         console.log(redirectUrl);
-        let targetUrl = $container.previousElementSibling.attr('href') || defautUrl;
+        let targetUrl = $container.siblings().last().attr('href') || defautUrl;
         let $tooltip = $link.tooltip();
         if($tooltip != null)
         {
